@@ -7,14 +7,18 @@
 <div>
     <h1>Login</h1>
 </div>
+<div class="col-md-4" >
+    {{ wtf.quick_form(form) }}    
+</div>
 <div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-    <p>
-        new user?
-        <a href="{{ url_for('auth.register') }}">
-            click here to register
-        </a>
-    </p>
+    <button type="button" class="btn btn-info" >
+        <p style="color: black;" >
+            new user?
+            <a href="{{ url_for('auth.register') }}" style="color: black;  text-decoration: none ;">
+                click here to register
+            </a>
+        </p>
+    </button>
 </div>
 
 {% endblock %}

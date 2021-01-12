@@ -3,7 +3,9 @@ from flask_login import login_user,logout_user, login_required
 from . import auth
 from ..models import User
 from .forms import LoginForm, RegistrationForm
+from ..email import send_mail
 from .. import db
+from flask_login import current_user
 
 
 #Definindo Rota de login com condicional para acesso do usuário
@@ -36,6 +38,36 @@ def register():
         user = User(email=form.email.data, username=form.username.data, password=form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('You can now Login.')
+        token = user.generate_confirmation_token()
+        send_mail(user.email, 'confirm your account', 'auth/email/confirm', user=user, token=token)
+        flash('A confirmation email has been sent to you by email.')
         return redirect(url_for('auth.login'))
     return render_template('auth/register.html', form=form)
+
+#criando rota de  confirmação de email.
+@auth.route('/confirm/<token>')
+@login_required
+def confirm(token):
+    if current_user.confirmed:
+        return redirect(url_for('main.index'))
+    if current_user.confirm(token):
+        db.session.commit()
+        flash('You have confirmed your  account. Thanks!!')
+    else:
+        flash('The  confirmantion link is invalid or has expired.')
+    return redirect(url_for('main.index'))
+
+#criando rota   para reenvio do email
+@auth.route('/confirm')
+@login_required
+def resend_confirmation():
+    token = current_user.generate_confirmation_token()
+    send_mail(current_user.email, 'Confirm your account','auth/email/confirm', user=current_user, token=token)
+    flash(' A new confirmation email has  been sent to you by email.')
+    return redirect(url_for('main.index'))
+
+#filtrando  contas não confirmadas
+@auth.before_app_request
+def before_request():
+    if current_user.is_authenticated and not current_user.confirmed and request.blueprint != 'auth' and request.endpoint != 'static':
+        return render_template('auth/unconfirmed.html')
