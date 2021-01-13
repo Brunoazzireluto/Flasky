@@ -19,6 +19,14 @@
             </a>
         </p>
     </button>
+    <button type="button" class="btn btn-info" >
+        <p style="color: black;" >
+            Forgot your password?
+            <a href="{{ url_for('auth.password_reset_request') }}" style="color: black;  text-decoration: none ;">
+                Click here to reset it
+            </a>
+        </p>
+    </button>
 </div>
 
 {% endblock %}
