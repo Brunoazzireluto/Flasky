@@ -13,6 +13,7 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
 
+
 #definindo função para a criação do app e dos módulos necessarios para seu funcionamento
 def create_app(config_name):
     app = Flask(__name__)
