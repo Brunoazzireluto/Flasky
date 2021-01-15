@@ -6,6 +6,7 @@
 {{ super() }}
 <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
 {% block navbar %}
@@ -34,7 +35,10 @@
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated %}
                 <li class="dropdown">
-                    <a href="#" class="dropdown" data-toggle="dropdown" style="color: #010102be; background-color: #2086cf; text-align: center;">Account <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img src="{{ current_user.gravatar(size=30) }}">
+                        Account <b class="caret"></b>
+                    </a>
                     <ul class="dropdown-menu" style='background-color: #2086cf'>
                         <li><a href="{{ url_for('auth.change_password') }}" style="color: #010102be;">Change Password</a></li>
                         <li><a href="{{ url_for('auth.change_email_request') }}" style="color: #010102be;">Change Email</a></li>
