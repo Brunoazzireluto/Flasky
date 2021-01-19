@@ -64,3 +64,13 @@ div.pagination {
 div.post-footer {
     text-align: right;
 }
+.table.followers tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+div.post-tabs {
+    margin-top: 16px;
+}
+div.post-tabs ul.posts {
+    margin: 0px;
+    border-top: none;
+}
