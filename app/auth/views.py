@@ -67,7 +67,7 @@ def resend_confirmation():
     flash(' A new confirmation email has  been sent to you by email.')
     return redirect(url_for('main.index'))
 
-#filtrando  contas não confirmadas
+#filtrando contas não confirmadas
 @auth.before_app_request
 def before_request():
     if current_user.is_authenticated:
@@ -150,7 +150,6 @@ def change_email_request():
         else:
             flash('Invalid email or password.')
     return render_template("auth/change_email.html", form=form)
-
 
 @auth.route('/change_email/<token>')
 @login_required
