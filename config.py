@@ -9,7 +9,7 @@ class Config:
     MAIL_USE_TLS = os.environ.get('MAIL_USE_TLS', False)
     MAIL_USE_SSL =  os.environ.get('MAIL_USE_SSL',  True)
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME', 'testepython1406@gmail.com')
-    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'bu62991881')
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD', 'Senha Padrão')
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'FLASKY ADMIN <testepython1406@gmail.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN', 'bruno.a@outlook.com.br')
